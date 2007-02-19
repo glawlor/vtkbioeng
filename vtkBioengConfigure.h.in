@@ -5,8 +5,9 @@ wishing to create their own VTK classes locally.
 #ifndef __Configure_h
 #define __Configure_h
 
-#if 0
-# define vtkBioeng_SHARED
+// Define @PROJECT_NAME@_SHARED if the library was built shared.
+#if @VTKBIOENG_BUILD_SHARED_LIBS_CONFIG@
+# define @PROJECT_NAME@_SHARED
 #endif
 
 #if defined(_MSC_VER) && defined(vtkBioeng_SHARED)

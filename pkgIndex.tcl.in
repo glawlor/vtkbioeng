@@ -1,12 +1,12 @@
-package ifneeded {vtkBioengTCL} {5.0} {
-  if {} {
-    package require -exact vtkinit {5.0}
-    foreach kit {} {
-      package require -exact "${kit}TCL" {5.0}
+package ifneeded {@PROJECT_NAME@TCL} {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@} {
+  if {@VTKBIOENG_BUILD_SHARED_LIBS_CONFIG@} {
+    package require -exact vtkinit {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@}
+    foreach kit {@VTKBIOENG_KITS@} {
+      package require -exact "${kit}TCL" {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@}
     }
-    ::vtk::init::load_library_package {vtkBioengTCL} {}
+    ::vtk::init::load_library_package {@PROJECT_NAME@TCL} {@VTKBIOENG_TCL_LIBRARY_DIR@}
   } else {
-    error {Error loading vtkBioengTCL.  vtkBioeng must be built\
+    error {Error loading @PROJECT_NAME@TCL.  @PROJECT_NAME@ must be built\
  with shared libraries for loading as a Tcl package.}
   }
 }

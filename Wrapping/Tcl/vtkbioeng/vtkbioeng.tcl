@@ -1,13 +1,4 @@
-catch {
-    package require vtk
-}
+# Here's the place to add some tcl procs to the vtkbioeng package
 
 
-#
-# Here you should pick the name of one your local classes
 
-
-if {[info commands vtkRemoveCellsFilter] != "" ||
-    [::vtk::load_component vtkBioengTCL] == ""} {
-    package provide vtkbioeng 4.5
-}

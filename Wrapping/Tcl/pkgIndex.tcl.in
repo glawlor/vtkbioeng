@@ -1,4 +1,4 @@
-package ifneeded {@PROJECT_NAME@TCL} {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@} {
+package ifneeded {vtkbioeng} {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@} {
   if {@VTKBIOENG_BUILD_SHARED_LIBS_CONFIG@} {
     package require -exact vtkinit {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@}
     foreach kit {@VTKBIOENG_KITS@} {
@@ -8,5 +8,11 @@ package ifneeded {@PROJECT_NAME@TCL} {@VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@} {
   } else {
     error {Error loading @PROJECT_NAME@TCL.  @PROJECT_NAME@ must be built\
  with shared libraries for loading as a Tcl package.}
+  }
+  
+  if {[catch {source [file join @PROJECT_BINARY_DIR@ Wrapping tcl vtkbioeng vtkbioeng.tcl]} errorMessage]} {
+    puts $errorMessage
+  } else {
+    package provide vtkbioeng @VTK_MAJOR_VERSION@.@VTK_MINOR_VERSION@
   }
 }

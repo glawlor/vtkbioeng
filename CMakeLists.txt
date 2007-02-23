@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
 # Set the project/library name here.  Classes should be declared as
 # "class VTK_BIOENG_EXPORT vtkFoo"
@@ -115,21 +115,25 @@ IF(VTK_FOUND)
     IF(CMAKE_CONFIGURATION_TYPES)
       FOREACH(config ${CMAKE_CONFIGURATION_TYPES})
         SET(VTKBIOENG_TCL_LIBRARY_DIR "${LIBRARY_OUTPUT_PATH}/${config}")
-        CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/pkgIndex.tcl.in
-                       ${PROJECT_BINARY_DIR}/${config}/pkgIndex.tcl
+        CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Wrapping/tcl/pkgIndex.tcl.in
+                       ${PROJECT_BINARY_DIR}/Wrapping/tcl/${config}/pkgIndex.tcl
+                       @ONLY IMMEDIATE)
+        CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Wrapping/tcl/vtkbioeng/vtkbioeng.tcl
+                       ${PROJECT_BINARY_DIR}/Wrapping/tcl/vtkbioeng/vtkbioeng.tcl
                        @ONLY IMMEDIATE)
       ENDFOREACH(config)
     ELSE(CMAKE_CONFIGURATION_TYPES)
       SET(VTKBIOENG_TCL_LIBRARY_DIR "${LIBRARY_OUTPUT_PATH}")
-      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/pkgIndex.tcl.in
-                     ${PROJECT_BINARY_DIR}/pkgIndex.tcl
+      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Wrapping/tcl/pkgIndex.tcl.in
+                     ${PROJECT_BINARY_DIR}/Wrapping/tcl/pkgIndex.tcl.in
+                     @ONLY IMMEDIATE)
+      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Wrapping/tcl/vtkbioeng/vtkbioeng.tcl
+                     ${PROJECT_BINARY_DIR}/Wrapping/tcl/vtkbioeng/vtkbioeng.tcl
                      @ONLY IMMEDIATE)
     ENDIF(CMAKE_CONFIGURATION_TYPES)
     
   ENDIF(VTK_WRAP_TCL)
 
-#  Nothing set up to test... TODO!
-#  SUBDIRS(Testing)
-
+  SUBDIRS(Testing)
   SUBDIRS(Utilities)
 ENDIF(VTK_FOUND)

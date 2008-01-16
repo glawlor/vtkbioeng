@@ -134,6 +134,19 @@ IF(VTK_FOUND)
     
   ENDIF(VTK_WRAP_TCL)
 
+  # Create Python wrappers if VTK is wrapped in Python.
+  IF(VTK_WRAP_PYTHON)
+    INCLUDE(${VTK_CMAKE_DIR}/vtkWrapPython.cmake)
+    VTK_WRAP_PYTHON3(${PROJECT_NAME}Python vtkBioengPYTHON_SRCS "${vtkBioeng_SRCS}")
+    ADD_LIBRARY(${PROJECT_NAME}PythonD ${vtkBioengPYTHON_SRCS})
+    ADD_LIBRARY(${PROJECT_NAME}Python MODULE ${PROJECT_NAME}PythonInit.cxx)
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME}PythonD ${PROJECT_NAME})
+    FOREACH(c ${vtkBioeng_LIBS})
+      TARGET_LINK_LIBRARIES(${PROJECT_NAME}PythonD ${c}PythonD)
+    ENDFOREACH(c)
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME}Python ${PROJECT_NAME}PythonD)
+  ENDIF(VTK_WRAP_PYTHON)
+
   SUBDIRS(Testing)
   SUBDIRS(Utilities)
 ENDIF(VTK_FOUND)

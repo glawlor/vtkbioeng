@@ -677,7 +677,7 @@ int vtkCollisionDetectionFilter::IntersectPolygonWithPolygon(int npts, double *p
             for (int jj=0; jj < npts2; jj++)
               {
               if (vtkLine::Intersection(pts+3*ii,pts+3*((ii+1)%npts),
-              pts2+3*jj,pts2+3*((jj+1)%npts2),u,v) > 0)
+              pts2+3*jj,pts2+3*((jj+1)%npts2),u,v) == 2)
                 {
                 //cout << "Found an overlapping one!!!" << endl;
                 for (int k=0;k<3;k++)

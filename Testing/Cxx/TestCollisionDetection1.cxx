@@ -40,7 +40,7 @@ int main()
    collide->SetMatrix(1, matrix1);
    collide->SetBoxTolerance(0.0);
    collide->SetCellTolerance(0.0);
-   collide->SetNumberOfCellsPerBucket(2);
+   collide->SetNumberOfCellsPerNode(2);
    collide->SetCollisionModeToAllContacts();
    collide->GenerateScalarsOn();
 

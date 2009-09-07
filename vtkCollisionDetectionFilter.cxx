@@ -61,7 +61,7 @@ vtkCollisionDetectionFilter::vtkCollisionDetectionFilter()
   this->NumberOfBoxTests = 0;
   this->BoxTolerance = 0.0;
   this->CellTolerance = 0.0;
-  this->NumberOfCellsPerBucket = 2;
+  this->NumberOfCellsPerNode = 2;
   this->tree0 = vtkOBBTree::New();
   this->tree1 = vtkOBBTree::New();
   this->GenerateScalars = 0;
@@ -496,12 +496,12 @@ int vtkCollisionDetectionFilter::RequestData(
   // rebuild the obb trees... they do their own mtime checking with input data
   tree0->SetDataSet(input[0]);
   tree0->AutomaticOn();
-  tree0->SetNumberOfCellsPerBucket(this->NumberOfCellsPerBucket);
+  tree0->SetNumberOfCellsPerNode(this->NumberOfCellsPerNode);
   tree0->BuildLocator();
 
   tree1->SetDataSet(input[1]);
   tree1->AutomaticOn();
-  tree1->SetNumberOfCellsPerBucket(this->NumberOfCellsPerBucket);
+  tree1->SetNumberOfCellsPerNode(this->NumberOfCellsPerNode);
   tree1->BuildLocator();
     
   // Set the Box Tolerance
@@ -780,6 +780,6 @@ void vtkCollisionDetectionFilter::PrintSelf(ostream& os, vtkIndent indent)
   
   os << indent << "Box Tolerance: " << this->BoxTolerance << "\n";
   os << indent << "Cell Tolerance: " << this->CellTolerance << "\n";
-  os << indent << "Number of cells per bucket: " << this->NumberOfCellsPerBucket << "\n";
+  os << indent << "Number of cells per Node: " << this->NumberOfCellsPerNode << "\n";
 
 }

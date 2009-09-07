@@ -155,8 +155,8 @@ public:
     
   //Description:
   // Set and Get the number of cells in each OBB. Default is 2
-  vtkSetMacro(NumberOfCellsPerBucket, int);
-  vtkGetMacro(NumberOfCellsPerBucket, int);
+  vtkSetMacro(NumberOfCellsPerNode, int);
+  vtkGetMacro(NumberOfCellsPerNode, int);
   
   //Description:
   // Set and Get the opacity of the polydata output when a collision takes place.
@@ -183,7 +183,7 @@ protected:
   
   int NumberOfBoxTests;
   
-  int NumberOfCellsPerBucket;
+  int NumberOfCellsPerNode;
   
   int GenerateScalars;
   
